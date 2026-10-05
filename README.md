@@ -12,7 +12,7 @@ In this hands-on workshop, you will see how “engineers-in-the-loop” agentic 
 ## Tools required
 - MATLAB R2023a or beyond 
 - Coding Agent (Codex Gemini, GitHub Copilot, etc.)
-- [MATLAB Agentic Toolkit] (https://github.com/matlab/matlab-agentic-toolkit)
+- [MATLAB Agentic Toolkit](https://github.com/matlab/matlab-agentic-toolkit)
 - [Simulink Agentic Toolkit](https://github.com/matlab/simulink-agentic-toolkit) 
 
 
