@@ -1,0 +1,7 @@
+name = "WorkingFolder_Ex2"
+
+[folders]
+path = [
+    "code",
+    "data",
+]
