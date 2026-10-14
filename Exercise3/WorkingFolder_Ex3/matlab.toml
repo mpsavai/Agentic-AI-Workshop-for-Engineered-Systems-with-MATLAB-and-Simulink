@@ -1,0 +1,25 @@
+name = "WorkingFolder_Ex3"
+
+[folders]
+path = [
+    "code",
+    "data",
+]
+
+[project.labels.Classification]
+Test = [
+]
+Derived = [
+]
+Design = [
+    "code/HouseHeating.slx",
+    "data/sldemo_househeat_data.m",
+]
+Other = [
+]
+Convenience = [
+]
+None = [
+]
+Artifact = [
+]
