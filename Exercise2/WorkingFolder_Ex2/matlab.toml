@@ -4,4 +4,13 @@ name = "WorkingFolder_Ex2"
 path = [
     "code",
     "data",
+    "tests",
+]
+test = [
+    "tests",
+]
+
+[project]
+startup-files = [
+    "setupExercise2.m",
 ]

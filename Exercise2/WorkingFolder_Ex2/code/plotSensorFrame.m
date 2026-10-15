@@ -1,9 +1,9 @@
-function result = inspectSensorFrame(frameIndex)
-%inspectSensorFrame - Plot one sensor-log frame in a bird's-eye view
-%   RESULT = inspectSensorFrame(FRAMEINDEX) loads the bundled sensor log,
+function result = plotSensorFrame(frameIndex)
+%plotSensorFrame - Plot one sensor-log frame in a bird's-eye view
+%   RESULT = plotSensorFrame(FRAMEINDEX) loads the bundled sensor log,
 %   plots radar, vision, and lane detections, and returns frame metadata.
 %
-%   RESULT = inspectSensorFrame() plots frame 99.
+%   RESULT = plotSensorFrame() plots frame 99.
 
 
 arguments
@@ -38,30 +38,30 @@ vehicleColor = [0.10 0.14 0.20];
 
 % Draw the road, vehicle, lane boundaries, and sensor detections.
 ax = localCreateAxes();
-localDrawRoad(ax);
+localDrawRoad(ax, forwardLimit);
 localDrawVehicle(ax, vehicleColor);
 localPlotLane(ax, laneFrame.left, forwardLimit);
 localPlotLane(ax, laneFrame.right, forwardLimit);
 localPlotObjects(ax, radarFrame.object, radarFrame.numObjects, radarColor, 52);
 localPlotObjects(ax, visionFrame.object, visionFrame.numObjects, visionColor, 58);
-hold(ax, "off");
 
 % Add display context after the scene content is complete.
 localFormatAxes(ax, scenario, result, forwardLimit, vehicleColor);
 localDrawKey(ax, radarColor, visionColor, vehicleColor);
+hold(ax, "off");
 end
 
 function scenario = localLoadScenario()
 %localLoadScenario - Load and standardize the bundled sensor log
-codeFolder = fileparts(mfilename("fullpath"));
-projectFolder = fileparts(codeFolder);
-dataPath = fullfile(projectFolder, "data", "citySensorLog.mat");
-if ~isfile(dataPath)
-    error("inspectSensorFrame:MissingData", ...
-        "Could not find sensor log at %s.", dataPath);
+
+project = matlab.project.rootProject;
+expectedRoot = fileparts(fileparts(mfilename("fullpath")));
+if isempty(project) || ~strcmpi(project.RootFolder, expectedRoot)
+    project = openProject(expectedRoot);
 end
 
-raw = load(dataPath, "vision", "radar", "lane");
+dataFile = fullfile(project.RootFolder, "data", "citySensorLog.mat");
+raw = load(dataFile, "vision", "radar", "lane");
 scenario = struct;
 scenario.Vision = raw.vision;
 scenario.Radar = raw.radar;
@@ -72,7 +72,7 @@ end
 
 function timeSeconds = localTimeSeconds(vision)
 %localTimeSeconds - Convert timestamps to elapsed seconds
-%The first vision timestamp is the zero-time reference.
+% The first vision timestamp is the zero-time reference.
 timeStamps = double([vision.timeStamp]);
 timeSeconds = (timeStamps - timeStamps(1))*1e-6;
 end
@@ -83,7 +83,7 @@ fig = figure(Name="Sensor Frame Snapshot");
 fig.Position(3:4) = [1600 600];
 fig.Color = [0.98 0.99 1.00];
 
-ax = axes;
+ax = axes(fig);
 ax.PositionConstraint = "innerposition";
 ax.FontSize = 16;
 ax.Color = [0.93 0.95 0.98];
@@ -127,9 +127,9 @@ plot(ax, xCoordinates, yCoordinates, Color=[0.25 0.25 0.25], ...
     LineStyle="--", LineWidth=1.4);
 end
 
-function localDrawRoad(ax)
+function localDrawRoad(ax, forwardLimit)
 %localDrawRoad - Draw the road surface behind the scene content
-patch(ax, [-5 60 60 -5], [-2.1 -2.1 2.1 2.1], [0.84 0.87 0.91], ...
+patch(ax, [-5 forwardLimit forwardLimit -5], [-2.1 -2.1 2.1 2.1], [0.84 0.87 0.91], ...
     EdgeColor="none", FaceAlpha=0.55);
 end
 
@@ -151,7 +151,6 @@ end
 
 function localDrawKey(ax, radarColor, visionColor, vehicleColor)
 %localDrawKey - Draw the custom detection key
-hold(ax, "on");
 keyX = 48.5;
 keyY = 9.8;
 keyWidth = 10.4;
@@ -175,5 +174,4 @@ rectangle(ax, Position=[keyX+0.35 keyY-5.0 0.9 0.55], ...
     Curvature=[0.35 0.35], FaceColor=vehicleColor, EdgeColor="none");
 text(ax, keyX+1.6, keyY-4.72, "Sensor vehicle", FontSize=14, ...
     VerticalAlignment="middle", Color=[0.10 0.14 0.20]);
-hold(ax, "off");
 end
