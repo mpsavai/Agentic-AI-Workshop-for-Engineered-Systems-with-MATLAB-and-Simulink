@@ -1,7 +1,7 @@
 function result = plotSensorFrame(frameIndex)
 %plotSensorFrame - Plot one sensor-log frame in a bird's-eye view
 %   RESULT = plotSensorFrame(FRAMEINDEX) loads the bundled sensor log,
-%   plots radar, vision, and lane detections, and returns frame metadata.
+%   plots radar and lane detections, and returns frame metadata.
 %
 %   RESULT = plotSensorFrame() plots frame 99.
 
@@ -16,7 +16,6 @@ scenario = localLoadScenario();
 % Select synchronized detections and clamp requests beyond the final frame.
 frameIndex = min(frameIndex, scenario.FrameCount);
 radarFrame = scenario.Radar(frameIndex);
-visionFrame = scenario.Vision(frameIndex);
 laneFrame = scenario.Lane(frameIndex);
 
 % Return the context needed to interpret the plotted snapshot.
@@ -24,8 +23,7 @@ result = struct( ...
     FrameIndex=frameIndex, ...
     FrameCount=scenario.FrameCount, ...
     TimeSeconds=scenario.TimeSeconds(frameIndex), ...
-    RadarCount=radarFrame.numObjects, ...
-    VisionCount=visionFrame.numObjects);
+    RadarCount=radarFrame.numObjects);
 
 % Build a plot in sensor-vehicle coordinates. The sensor
 % vehicle is at (0, 0), positive x is distance ahead, and y is left/right.
@@ -33,7 +31,6 @@ forwardLimit = 60;
 
 % Reuse colors in the scene and the key to keep them consistent.
 radarColor = [0.00 0.45 0.85];
-visionColor = [0.96 0.38 0.08];
 vehicleColor = [0.10 0.14 0.20];
 
 % Draw the road, vehicle, lane boundaries, and sensor detections.
@@ -43,48 +40,43 @@ localDrawVehicle(ax, vehicleColor);
 localPlotLane(ax, laneFrame.left, forwardLimit);
 localPlotLane(ax, laneFrame.right, forwardLimit);
 localPlotObjects(ax, radarFrame.object, radarFrame.numObjects, radarColor, 52);
-localPlotObjects(ax, visionFrame.object, visionFrame.numObjects, visionColor, 58);
 
 % Add display context after the scene content is complete.
 localFormatAxes(ax, scenario, result, forwardLimit, vehicleColor);
-localDrawKey(ax, radarColor, visionColor, vehicleColor);
+localDrawKey(ax, radarColor, vehicleColor);
 hold(ax, "off");
 end
 
 function scenario = localLoadScenario()
 %localLoadScenario - Load and standardize the bundled sensor log
-
 project = matlab.project.rootProject;
 expectedRoot = fileparts(fileparts(mfilename("fullpath")));
 if isempty(project) || ~strcmpi(project.RootFolder, expectedRoot)
     project = openProject(expectedRoot);
 end
-
 dataFile = fullfile(project.RootFolder, "data", "citySensorLog.mat");
-raw = load(dataFile, "vision", "radar", "lane");
+raw = load(dataFile, "radar", "lane");
 scenario = struct;
-scenario.Vision = raw.vision;
 scenario.Radar = raw.radar;
 scenario.Lane = raw.lane;
-scenario.FrameCount = numel(raw.vision);
-scenario.TimeSeconds = localTimeSeconds(raw.vision);
+scenario.FrameCount = numel(raw.radar);
+scenario.TimeSeconds = localTimeSeconds(raw.radar);
 end
 
-function timeSeconds = localTimeSeconds(vision)
+function timeSeconds = localTimeSeconds(radar)
 %localTimeSeconds - Convert timestamps to elapsed seconds
-% The first vision timestamp is the zero-time reference.
-timeStamps = double([vision.timeStamp]);
+% The first radar timestamp is the zero-time reference.
+timeStamps = double([radar.timeStamp]);
 timeSeconds = (timeStamps - timeStamps(1))*1e-6;
 end
 
 function ax = localCreateAxes()
 %localCreateAxes - Create the configured bird's-eye plotting area
 fig = figure(Name="Sensor Frame Snapshot");
-fig.Position(3:4) = [1600 600];
 fig.Color = [0.98 0.99 1.00];
 
-ax = axes(fig);
-ax.PositionConstraint = "innerposition";
+layout = tiledlayout(fig, 1, 1, Padding="compact", TileSpacing="compact");
+ax = nexttile(layout);
 ax.FontSize = 16;
 ax.Color = [0.93 0.95 0.98];
 ax.XColor = [0.18 0.22 0.28];
@@ -149,7 +141,7 @@ text(ax, 0.02, 0.96, sprintf("Frame %03d / %03d   |   t = %.2f s", ...
     VerticalAlignment="top", BackgroundColor=[0.98 0.99 1.00], Margin=6);
 end
 
-function localDrawKey(ax, radarColor, visionColor, vehicleColor)
+function localDrawKey(ax, radarColor, vehicleColor)
 %localDrawKey - Draw the custom detection key
 keyX = 48.5;
 keyY = 9.8;
@@ -162,16 +154,12 @@ scatter(ax, keyX+0.8, keyY-1.1, 52, radarColor, "filled", ...
     MarkerEdgeColor="w", LineWidth=0.7);
 text(ax, keyX+1.6, keyY-1.1, "Radar", FontSize=14, ...
     VerticalAlignment="middle", Color=[0.10 0.14 0.20]);
-scatter(ax, keyX+0.8, keyY-2.25, 58, visionColor, "filled", ...
-    MarkerEdgeColor="w", LineWidth=0.7);
-text(ax, keyX+1.6, keyY-2.25, "Vision", FontSize=14, ...
-    VerticalAlignment="middle", Color=[0.10 0.14 0.20]);
-plot(ax, [keyX+0.35 keyX+1.25], [keyY-3.45 keyY-3.45], "--", ...
+plot(ax, [keyX+0.35 keyX+1.25], [keyY-2.25 keyY-2.25], "--", ...
     Color=[0.25 0.25 0.25], LineWidth=1.4);
-text(ax, keyX+1.6, keyY-3.45, "Lane boundary", FontSize=14, ...
+text(ax, keyX+1.6, keyY-2.25, "Lane boundary", FontSize=14, ...
     VerticalAlignment="middle", Color=[0.10 0.14 0.20]);
-rectangle(ax, Position=[keyX+0.35 keyY-5.0 0.9 0.55], ...
+rectangle(ax, Position=[keyX+0.35 keyY-3.8 0.9 0.55], ...
     Curvature=[0.35 0.35], FaceColor=vehicleColor, EdgeColor="none");
-text(ax, keyX+1.6, keyY-4.72, "Sensor vehicle", FontSize=14, ...
+text(ax, keyX+1.6, keyY-3.52, "Sensor vehicle", FontSize=14, ...
     VerticalAlignment="middle", Color=[0.10 0.14 0.20]);
 end

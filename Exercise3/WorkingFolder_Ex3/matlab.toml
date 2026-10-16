@@ -2,8 +2,13 @@ name = "WorkingFolder_Ex3"
 
 [folders]
 path = [
-    "code",
     "data",
+    "models",
+]
+
+[project]
+startup-files = [
+    "utilities/setupExercise3.m",
 ]
 
 [project.labels.Classification]
@@ -12,7 +17,6 @@ Test = [
 Derived = [
 ]
 Design = [
-    "code/HouseHeating.slx",
     "data/sldemo_househeat_data.m",
 ]
 Other = [
@@ -23,3 +27,6 @@ None = [
 ]
 Artifact = [
 ]
+
+[simulink]
+cache-folder = "work"

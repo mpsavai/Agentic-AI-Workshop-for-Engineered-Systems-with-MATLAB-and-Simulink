@@ -5,6 +5,7 @@ path = [
     "code",
     "data",
     "tests",
+    "utilities",
 ]
 test = [
     "tests",
@@ -12,5 +13,5 @@ test = [
 
 [project]
 startup-files = [
-    "setupExercise2.m",
+    "utilities/setupExercise2.m",
 ]
