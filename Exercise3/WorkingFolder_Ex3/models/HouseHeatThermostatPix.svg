@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:d="http://www.mathworks.com/blockgraphics" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg" width="385" height="418" d:options="PreserveAspect:On;Rotate:Off;Resize:FitToBlock;">
+
+	<g ie-elementType="Part" id="part" title="part_0" ie-ports="left:simulink*simulink,top:,right:simulink,bottom:">
+		<rect id="rect" class="rect" style="stroke-width:5;fill:none;" x="30" y="31.83" width="325" height="357" rx="0" ry="0"/>
+		<path id="path" class="path" style="stroke-width:5;" d=" M 82,388.83 Q 94.25,259.83 195.5,260.83 Q 296.75,261.83 303,388.83"/>
+		<path id="triangle" class="path" style="fill:#212121;stroke-width:0.95;" transform="matrix(0.9902680687,-0.139173101,0.139173101,0.9902680687,-31.2108404613,25.2563805757)" d=" M 164.98,208.74 L 172.48,262.86 L 157.48,262.86 L 164.98,208.74 Z"/>
+		<ellipse id="ellipse" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="86.5" cy="236.5" rx="4.5" ry="4.5"/>
+		<ellipse id="ellipse_1" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="120" cy="213.5" rx="4.5" ry="4.5"/>
+		<ellipse id="ellipse_2" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="157.11" cy="202" rx="4.5" ry="4.5"/>
+		<ellipse id="ellipse_3" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="192.5" cy="197.5" rx="4.5" ry="4.5"/>
+		<ellipse id="ellipse_6" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="303" cy="236.5" rx="4.5" ry="4.5"/>
+		<ellipse id="ellipse_7" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="272" cy="214.83" rx="4.5" ry="4.5"/>
+		<ellipse id="ellipse_8" class="ellipse" style="stroke-width:0.95;fill:#212121;" cx="233.11" cy="202" rx="4.5" ry="4.5"/>
+	</g>
+</svg>
