@@ -10,7 +10,7 @@ In this hands-on workshop, you will see how “engineers-in-the-loop” agentic 
 - Leveraging Simulink Agentic Toolkit to explore, modify, and debug Simulink architectures
 
 ## Tools required
-- MATLAB R2023a or beyond 
+- MATLAB R2026b  
 - Coding Agent (Codex Gemini, GitHub Copilot, etc.)
 - [MATLAB Agentic Toolkit](https://github.com/matlab/matlab-agentic-toolkit)
 - [Simulink Agentic Toolkit](https://github.com/matlab/simulink-agentic-toolkit) 
