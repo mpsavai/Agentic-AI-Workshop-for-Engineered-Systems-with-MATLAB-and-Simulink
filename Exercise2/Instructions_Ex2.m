@@ -75,7 +75,16 @@ myTerminal.run("");
 myTerminal.run("List all the skills we used for the analysis"); 
 pause(1)
 myTerminal.run("");
-%[text] 
+%%
+%[text] ### 
+%[text] ### Step 7: Clean Up
+%[text] Note: Only run this section if you have completed the sections above **and** you do not intend to run the optional prompts below. 
+%[text] %[text:anchor:TMP_860b] We finish the exercise by shutting down the MATLAB terminal used for the agent and closing the current project to ensure a proper cleanup.
+% Shut down the MATLAB terminal session
+delete(myTerminal)
+% Close the active MATLAB project
+close(myProj);
+%[text] ###  
 %%
 %[text] ## 
 %[text] ## Further Exploration (Optional) 

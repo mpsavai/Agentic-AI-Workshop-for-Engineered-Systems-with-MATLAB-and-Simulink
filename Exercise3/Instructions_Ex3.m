@@ -90,6 +90,16 @@ pause(1)
 myTerminal.run("");
 %[text] 
 %%
+%[text] 
+%[text] ### Step 7: Clean Up
+%[text] Note: Only run this section if you have completed the sections above **and** you do not intend to run the optional prompts below. 
+%[text] %[text:anchor:TMP_860b] We finish the exercise by shutting down the MATLAB terminal used for the agent and closing the current project to ensure a proper cleanup.
+% Shut down the MATLAB terminal session
+delete(myTerminal)
+% Close the active MATLAB project
+close(myProj);
+%[text] 
+%%
 %[text] ## 
 %[text] ## Further Exploration 
 %[text] This exercise showed how far natural-language prompts and a couple of built-in skills can complete a real debugging and modeling task. The same pattern extends well beyond this one example. A few ways to keep building on it:
