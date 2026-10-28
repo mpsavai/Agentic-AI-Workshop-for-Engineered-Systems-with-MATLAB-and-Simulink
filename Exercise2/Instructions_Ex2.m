@@ -8,11 +8,13 @@
 %[text] ## Setup
 %[text] We will use projects to manage our files for this exercise as well as the next. MATLAB Projects help you organize your work and collaborate. Use projects to find files required to run your code, manage and share files and settings, and interact with source control. For more information about projects, see [Create Projects](https://www.mathworks.com/help/matlab/matlab_prog/create-projects.html).
 %[text] First we will open our project. At startup, we have configured the project to execute setupExercise2 which does the following: 
-%[text] - Close MATLAB-managed terminals 
-%[text] - Make WorkingFolder\_Ex2 your working folder, This is where the agent will be working. 
+%[text] - Close MATLAB-managed terminals
+%[text] - Make WorkingFolder\_Ex2 your working folder, This is where the agent will be working.
 %[text] - Close any open figures, clear variables in workspace and clear command window \
 % Open exercise project
-myProj = openProject("WorkingFolder_Ex2");
+scriptFile = matlab.desktop.editor.getActiveFilename;
+scriptDir = fileparts(scriptFile);
+myProj = openProject(fullfile(scriptDir, "WorkingFolder_Ex2"));
 %[text] %[text:anchor:TMP_730c] **Open Your Agent in the Current Working Folder**
 % Open a Terminal in MATLAB 
 myTerminal = terminal(Theme="dark",StartupCommand="codex");

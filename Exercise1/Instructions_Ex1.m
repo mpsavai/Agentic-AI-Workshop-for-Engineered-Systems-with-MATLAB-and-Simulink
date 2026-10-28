@@ -14,14 +14,14 @@ cd(scriptDir)
 %[text] ### Step 2: Set Up MATLAB or Simulink to Connect to an Agent
 %[text] **Note: This is already configured for this workshop.** 
 %[text] To connect your agent to the existing session, run the following command in the MATLAB command window.
-%[text]   `>> shareMATLABSession()`
+%[text]  `>> shareMATLABSession()`
 %[text] 
 %[text] 
 %%
 %[text] ### 
 %[text] ### Step 3: Open a terminal in MATLAB and start Codex 
 %[text] Use the terminal in MATLAB to run command-line interface tools such AI coding agents, git, and docker without leaving the MATLAB desktop. You can download the functionality here: [Terminal in MATLAB](https://github.com/matlab/terminal-in-matlab)
-%[text] - To copy and paste in the terminal use your mouse or  Ctrl + Shift + C or Ctrl + Shift + V respectively. 
+%[text] - To copy and paste in the terminal use your mouse or  Ctrl + Shift + C or Ctrl + Shift + V respectively.
 %[text] - To scroll in the terminal use your mouse scroll or  Shift + Page Up / Shift + Page Down \
 % Open a Terminal in MATLAB 
 myTerminal = terminal(Theme="dark",StartupCommand="codex");

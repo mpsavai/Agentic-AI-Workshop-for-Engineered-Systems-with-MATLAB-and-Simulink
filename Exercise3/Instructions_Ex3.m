@@ -10,7 +10,9 @@
 %[text] - Make WorkingFolder\_Ex3 your working folder, This is where the agent will be working.
 %[text] - Close any open figures, clear variables in workspace and clear command window \
 % Open exercise project
-myProj = openProject("WorkingFolder_Ex3");
+scriptFile = matlab.desktop.editor.getActiveFilename;
+scriptDir = fileparts(scriptFile);
+myProj = openProject(fullfile(scriptDir, "WorkingFolder_Ex3"));
 %[text] %[text:anchor:TMP_730c] **Open Your Agent in the Current Working Folder**
 % Open a Terminal in the house heating Simulink model
 modelName = "HouseHeating";
