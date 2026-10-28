@@ -9,7 +9,7 @@ catch exception
         "Could not close terminals: %s", exception.message);
 end
 
-close all;
+close all force;
 clearvars;
 clc;
 
