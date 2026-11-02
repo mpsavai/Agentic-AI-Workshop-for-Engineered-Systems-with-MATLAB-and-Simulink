@@ -28,4 +28,4 @@ disp("Working directory for this exercise: " + workingDirectory);
 modelName = "HouseHeating";
 open_system(modelName);
 
-edit ../Instructions_Ex3.mlx
+edit ../Instructions_Ex3.m
