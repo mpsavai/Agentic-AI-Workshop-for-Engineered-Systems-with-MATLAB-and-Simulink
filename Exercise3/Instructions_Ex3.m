@@ -30,7 +30,8 @@ myTerminal = terminal(Place="matlab",Theme="dark",StartupCommand="codex");
 %[text] Ask the agent to examine the model and give some analysis regarding heat flow through the model.
 myTerminal.run("Analyze the Simulink model HouseHeating.slx and " + ...
     "provide an overview of its major components and subsystems. " + ...
-    "Provide equations for the major heat transfer paths.");
+    "Provide equations for the major heat transfer paths. Write " + ...
+    "the equations using simple notation (no inline backslashes).");
 pause(1)
 myTerminal.run("");
 %[text] 
@@ -90,14 +91,15 @@ myTerminal.run("");
 %[text] 
 %%
 %[text] ### 
-%[text] ### Step 6: Generate Controller Code
-%[text] In Model-Based Design, we typically want to deploy some part of our design (such as a controller) using automatic code generation. Agents can leverage code generation capabilities in MATLAB and Simulink to deterministically create traceable code from our design. You can even ask the agent to target specific hardware platforms, implement certain optimizations, etc.
+%[text] ### (Optional) Step 6: Generate Controller Code
+%[text] In Model-Based Design, we typically want to deploy some part of our design (such as a controller) to hardware. Agents can leverage automatic code generation capabilities in MATLAB and Simulink to deterministically create traceable code from our design. We can even ask the agent to target specific hardware platforms, implement certain optimizations, etc.
 %[text] Ask the agent to create C code for the thermostat controller targeting a generic 32-bit embedded platform and optimizing for memory footprint. 
 myTerminal.run("Convert the `Thermostat` subsystem to a new standalone " + ...
     "model named `ThermostatController.slx`. Then, generate embedded C " + ...
     "code for this standalone model. Use a generic 32-bit embedded " + ...
     "processor as the target hardware and optimize the generated " + ...
-    "code for memory footprint. Open the code generation report when finished.");
+    "code for memory footprint. Generate the source code only -- do not " + ...
+    "build an executable. Open the code generation report when finished.");
 pause(1)
 myTerminal.run("");
 %[text] 
