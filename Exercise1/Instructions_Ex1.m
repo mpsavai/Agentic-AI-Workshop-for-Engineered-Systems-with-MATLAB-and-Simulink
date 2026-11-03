@@ -58,6 +58,13 @@ myTerminal.run("");
 %[text] Example: 
 %[text] ![](text:image:3b9a)
 %[text] 
+%%
+%[text] ### Step 6: Clean Up
+%[text] Note: Only run this section if you have completed the sections above. 
+%[text] %[text:anchor:TMP_860b] We finish the exercise by shutting down the MATLAB terminal used for the agent.
+% Shut down the MATLAB terminal session
+delete(myTerminal)
+%[text] 
 %[text] 
 
 %[appendix]{"version":"1.0"}

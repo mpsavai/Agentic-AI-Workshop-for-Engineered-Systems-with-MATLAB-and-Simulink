@@ -1,14 +1,6 @@
 %% Set up a clean environment for Exercise 2
 % This script is intended to run as a project startup file.
 
-% Close MATLAB-managed terminals when that functionality is available.
-try
-    terminal.closeAll();
-catch exception
-    warning("setupExercise:TerminalCleanupSkipped", ...
-        "Could not close terminals: %s", exception.message);
-end
-
 close all force;
 clearvars;
 clc;
@@ -24,3 +16,5 @@ end
 workingDirectory = myProj.RootFolder;
 cd(workingDirectory);
 disp("Working directory for this exercise: " + workingDirectory);
+
+edit ../Instructions_Ex2.m

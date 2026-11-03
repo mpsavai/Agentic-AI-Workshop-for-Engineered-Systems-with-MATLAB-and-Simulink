@@ -18,4 +18,4 @@ In this hands-on workshop, you will see how “engineers-in-the-loop” agentic 
 
 ## Contributors 
 - Mehernaz Savai 
-- Jordan Olsen
+- Jordan Olson
