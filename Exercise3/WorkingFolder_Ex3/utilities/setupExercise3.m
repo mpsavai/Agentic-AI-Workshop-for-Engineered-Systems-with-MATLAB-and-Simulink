@@ -1,14 +1,6 @@
 %% Set up a clean environment for Exercise 3
 % This script is intended to run as a project startup file.
 
-% Close MATLAB-managed terminals when that functionality is available.
-try
-    terminal.closeAll();
-catch exception
-    warning("setupExercise:TerminalCleanupSkipped", ...
-        "Could not close terminals: %s", exception.message);
-end
-
 close all force;
 clearvars;
 clc;
